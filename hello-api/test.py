@@ -1,6 +1,6 @@
 from api import app
-import json
 from api import set_previous_name
+import json
 
 
 def test_hello():
@@ -34,9 +34,3 @@ def test_hello_with_cached_name_and_input_name():
     response = app.test_client().get('/hello?name=Johnny')
     res = json.loads(response.data.decode('utf-8')).get("message")
     assert res == 'Hello Johnny, previously known as John'
-
-
-def test_square():
-    response = app.test_client().get("/square/100")
-    square = json.loads(response.data.decode('utf-8')).get("result")
-    assert square == 10000
