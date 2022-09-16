@@ -17,17 +17,23 @@ def home():
             else:
                 message = "Hello "+name+", previously known as "+previous_name
             previous_name = name
-
         else:
-            message = "Hello world"
+            if previous_name is not None:
+                message = "Hello "+previous_name
+            else:
+                message = "Hello world"
         return jsonify({'message': message})
     elif request.method == "POST":
         json_input = request.get_json(silent=False)
         if "name" not in json_input:
             return "Bad method", 400
-        previous_name = json_input["name"]
+        set_previous_name(json_input["name"])
         return jsonify({"response": "OK"})
 
+
+def set_previous_name(name: str):
+    global previous_name
+    previous_name = name
 
 @app.route('/square/<int:num>', methods=['GET'])
 def disp(num):
