@@ -35,10 +35,6 @@ def set_previous_name(name: str):
     global previous_name
     previous_name = name
 
-@app.route('/square/<int:num>', methods=['GET'])
-def disp(num):
-    return jsonify({'result': num**2})
-
 
 # driver function
 if __name__ == '__main__':
